@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Muthu.Services.CustomerAPI.Service;
-using Muthu.StoreDB.Models;
+using Muthu.Infrastructure.Peristence.Models;
 
 namespace Muthu.Services.CustomerAPI.Controllers
 {
@@ -11,17 +10,14 @@ namespace Muthu.Services.CustomerAPI.Controllers
         [HttpGet]
         public Task<IEnumerable<Customer>> GetCustomers()
         {
-            CustomerService customerService = new CustomerService();
-            return customerService.GetCustomers();
 
-            //return new[] { new Customer() };
+            return null;
         }
 
         [HttpPost]
         public Task<ActionResult> CreateCustomer(Customer customer)
         {
-            CustomerService customerService = new CustomerService();
-            return customerService.CreateCustomer(customer);
+            return null;
         }
 
 

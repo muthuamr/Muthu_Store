@@ -1,0 +1,11 @@
+body {
+  background-color: #eaeaea !important;
+}
+.ui.inverted.top.fixed.menu {
+  background-image: linear-gradient(135deg,rgb(233, 10, 204) 0%, rgb(155, 50, 133) 69%,rgb(104, 50, 85) 89%) !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

@@ -1,5 +1,5 @@
-using Muthu.Services.CustomerAPI.Service;
-using Muthu.Services.CustomerAPI.Service.IService;
+using Muthu.Services.BusinessLogic;
+using Muthu.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 

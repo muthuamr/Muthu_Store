@@ -3,7 +3,6 @@ import {Table,Button} from "semantic-ui-react";
 import "../../index.css";
 
 const CustomerTable=(props)=>{
-
     return(
     <Fragment>
         <h1 style={{marginLeft:"30px"}}>Customers List</h1>

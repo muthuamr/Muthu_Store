@@ -32,11 +32,8 @@ return (
         style={{ marginRight: "30px", marginTop: "30px", marginLeft: "10px" }}
       >
         <Form onSubmit={handleSubmit} autoComplete="off">
-            <Form.Input placeholder="Title" value={customer.title} name="title" onChange={handleInputChange}></Form.Input>
-            <Form.Input placeholder="Language" value={customer.movieLanguage} name="movieLanguage" onChange={handleInputChange}></Form.Input>
-            <Form.Input placeholder="Year" value={customer.releaseYear} name="releaseYear" onChange={handleInputChange}></Form.Input>
-            <Form.Input placeholder="OTT" value={customer.ott} name="ott" onChange={handleInputChange}></Form.Input>
-            <Form.TextArea placeholder="Description" value={customer.description} onChange={handleInputChange}></Form.TextArea>
+            <Form.Input placeholder="Customer Name" value={customer.customerName} name="customerName" onChange={handleInputChange}></Form.Input>
+            <Form.TextArea placeholder="Address" value={customer.customerAddress} name="customerAddress" onChange={handleInputChange}></Form.TextArea>
             <Button floated="right" positive type="submit" content="Submit"></Button>
             <Button floated="right" negative type="button" content="Cancel" onClick={()=>props.closeForm()}></Button>
         </Form>

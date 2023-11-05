@@ -7,10 +7,8 @@ const CustomerAdd=(props)=>
 {
     const initialState=
     {
-        title: "",
-        movieLanguage: "",
-        releaseYear: "",
-        ott: ""
+        customerName: "",
+        customerAddress: ""        
     };
 
     const [customer, setCustomer]=useState(initialState);
@@ -24,7 +22,7 @@ const CustomerAdd=(props)=>
     const handleSubmit=(event)=>
     {
         event.preventDefault();
-        if(!customer.title)
+        if(!customer.customerName)
         {
             toast.error("Please fill in the details!", {
                 position:toast.POSITION.TOP_RIGHT
@@ -40,10 +38,8 @@ const CustomerAdd=(props)=>
         <h1 style={{marginLeft:"15px"}}> Add Customer </h1>
         <Segment clearing style={{marginRight:"30px",marginTop:"30px",margingLeft:"10px"}}>
             <Form onSubmit={handleSubmit} autoComplete="off">
-                <Form.Input placeholder="Title" value={customer.title} name="title" onChange={handleInputChange}></Form.Input>
-                <Form.Input placeholder="Language" value={customer.movieLanguage} name="movieLanguage" onChange={handleInputChange}></Form.Input>
-                <Form.Input placeholder="Year" value={customer.releaseYear} name="releaseYear" onChange={handleInputChange}></Form.Input>
-                <Form.Input placeholder="OTT" value={customer.ott} name="ott" onChange={handleInputChange}></Form.Input>
+                <Form.Input placeholder="Customer Name" value={customer.customerName} name="customerName" onChange={handleInputChange}></Form.Input>
+                <Form.TextArea placeholder="Address" value={customer.customerAddress} name="customerAddress" onChange={handleInputChange}></Form.TextArea>
                 <Button floated="right" positive type="submit" content="Submit"/>
                 <Button floated="right" type="button" content="Cancel" onClick={()=>props.closeForm()}></Button>
             </Form>

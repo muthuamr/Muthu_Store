@@ -34,10 +34,13 @@ const CustomerDashboard=()=>{
     //End
     
     useEffect(()=>{
-        axios.get("http://localhost:5159/api/movies").then((response)=>{
-            setCustomers(response.data);
+        axios.get("https://localhost:7119/api/customers").then((response)=>{
+          if(response.data.isSuccess)
+          {
+              setCustomers(response.data.result);
+          }
         });
-    },[customers]);
+    },[]);
 
    const editForm=(customer)=>
     {
@@ -64,13 +67,11 @@ const CustomerDashboard=()=>{
     {
         axios({
             method: "put",
-            url: `http://localhost:5159/api/movies/${customer.id}`,
+            url: `https://localhost:7119/api/customers/${customer.customerId}`,
             data: {
-              Id: customer.id,
-              Title: customer.title,
-              MovieLanguage: customer.movieLanguage,
-              ReleaseYear: customer.releaseYear,
-              OTT: customer.ott,
+              customerId: customer.customerId,
+              customerName: customer.customerName,
+              customerAddress: customer.customerAddress
             },
             config: {
               headers: {
@@ -80,6 +81,7 @@ const CustomerDashboard=()=>{
             },
           })
             .then((response) => {
+              setCustomers([...customers, customer]);
               console.log(response);
               toast.success("Customer updated successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -88,21 +90,19 @@ const CustomerDashboard=()=>{
             .catch((error) => {
               console.log("the error has occured: " + error);
             });
-      
-
-        setCustomers([...customers, customer]);
+        
     }
 
     const deleteCustomer=()=>
     {
         setCustomer("");
-        axios.delete(`http://localhost:5159/api/movies/${customer.id}`).then(()=>{
+        axios.delete(`https://localhost:7119/api/customers/${customer.customerId}`).then(()=>{
             toast.success("Customer deleted successfully", {
                 position:toast.POSITION.TOP_RIGHT
             });
         });
 
-        setCustomers([...customers.filter((x)=>x.id!==customer.id)]);
+        setCustomers([...customers.filter((x)=>x.customerId!==customer.customerId)]);
     }
 
     const openDelete=(customer)=>
@@ -126,16 +126,13 @@ const CustomerDashboard=()=>{
       const handleSubmit=(customer)=>
       {
         const data={
-            Id: uuid(),
-            Title: customer.title,
-            MovieLanguage: customer.movieLanguage,
-            ReleaseYear: customer.releaseYear,
-            OTT: customer.ott
+            customerName: customer.customerName,
+            customerAddress: customer.customerAddress            
         };
 
         axios({
             method: "post",
-            url: "http://localhost:5159/api/movies",
+            url: "https://localhost:7119/api/customers/create",
             data: data,
             config:{
                 headers: {
@@ -144,11 +141,20 @@ const CustomerDashboard=()=>{
                 }
             }
         }).then((response)=>{
-            console.log(response);
-            setCustomers([...customers,data]);
-            toast.success("Customer added successfully",{
-                position:toast.POSITION.TOP_RIGHT
-            });
+            if(response.data.isSuccess)
+            {
+              console.log(response);
+              data.customerId=response.data.result.customerId;
+              setCustomers([...customers,data]);
+              toast.success("Customer added successfully",{
+                  position:toast.POSITION.TOP_RIGHT
+              });
+          }
+          else
+          {
+            console.log("The API failed"+response);
+          }
+         
         }).catch((error)=>{
             console.log("The error has occured: "+error);
         });

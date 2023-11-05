@@ -17,43 +17,19 @@ const CustomerTable=(props)=>{
       >
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>Title</Table.HeaderCell>
-                    <Table.HeaderCell>Language</Table.HeaderCell>
-                    <Table.HeaderCell>Year</Table.HeaderCell>
-                    <Table.HeaderCell>OTT</Table.HeaderCell>
+                    <Table.HeaderCell>Customer Name</Table.HeaderCell>
+                    <Table.HeaderCell>Address</Table.HeaderCell>                    
                     <Table.HeaderCell>Actions</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
                 {props.currentCustomer.map((customer)=>(               
-                <Table.Row key={customer.id}>
-                <Table.Cell>{customer.title}</Table.Cell>
-                <Table.Cell>{customer.movieLanguage}</Table.Cell>
-                <Table.Cell>{customer.releaseYear}</Table.Cell>
-                <Table.Cell>{customer.ott}</Table.Cell>
+                <Table.Row key={customer.customerId}>
+                <Table.Cell>{customer.customerName}</Table.Cell>
+                <Table.Cell>{customer.customerAddress}</Table.Cell>
                 <Table.Cell>
                     <Button positive onClick={()=>props.editForm(customer)}>Edit</Button>
-                    <Button negative onClick={()=>props.openDelete(customer)}>Delete</Button>
-
-                    {/* <Button onClick={() => {
-                        const confirmBox = window.confirm(
-                        "Do you really want to delete this Crumb?"
-                        )
-                        if (confirmBox === true) {
-                            props.deleteCustomer(customer.id);
-                        }
-                    }}>Delete</Button>           */}
-
-                        {/* <Button onClick={() => {
-                            <ModalConfirmation></ModalConfirmation>
-                        const confirmBox = window.confirm(
-                        "Do you really want to delete this Crumb?"
-                        )
-                        if (confirmBox === true) {
-                            props.deleteCustomer(customer.id);
-                        }
-                    }}>Delete</Button> */}
-
+                    <Button negative onClick={()=>props.openDelete(customer)}>Delete</Button>                  
                 </Table.Cell>
                 </Table.Row>
                  ))}

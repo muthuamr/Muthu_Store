@@ -8,10 +8,9 @@ const CustomerTable=(props)=>{
         <h1 style={{marginLeft:"30px"}}>Customers List</h1>
         <Table celled style={{
           marginLeft: "30px",
-          marginTop: "30px",
-          width: "1100px",
-          border: "1px solid black",
-        }}
+          marginTop: "30px"       
+         
+        }} 
       >
             <Table.Header>
                 <Table.Row>

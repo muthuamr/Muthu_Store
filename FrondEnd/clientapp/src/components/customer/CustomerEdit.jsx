@@ -35,7 +35,7 @@ return (
             <Form.Input placeholder="Customer Name" value={customer.customerName} name="customerName" onChange={handleInputChange}></Form.Input>
             <Form.TextArea placeholder="Address" value={customer.customerAddress} name="customerAddress" onChange={handleInputChange}></Form.TextArea>
             <Button floated="right" positive type="submit" content="Submit"></Button>
-            <Button floated="right" negative type="button" content="Cancel" onClick={()=>props.closeForm()}></Button>
+            <Button floated="right" content="Cancel" onClick={()=>props.closeForm()}></Button>
         </Form>
     </Segment>
     

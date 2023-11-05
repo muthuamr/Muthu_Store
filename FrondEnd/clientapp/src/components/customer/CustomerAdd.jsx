@@ -35,7 +35,7 @@ const CustomerAdd=(props)=>
 
     return (
         <>
-        <h1 style={{marginLeft:"15px"}}> Add Customer </h1>
+        <h1 style={{marginLeft:"30px"}}> Add Customer </h1>
         <Segment clearing style={{marginRight:"30px",marginTop:"30px",margingLeft:"10px"}}>
             <Form onSubmit={handleSubmit} autoComplete="off">
                 <Form.Input placeholder="Customer Name" value={customer.customerName} name="customerName" onChange={handleInputChange}></Form.Input>

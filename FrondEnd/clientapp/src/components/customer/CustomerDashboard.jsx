@@ -63,6 +63,15 @@ const CustomerDashboard=()=>{
         setCustomer("");
     }
 
+    const getupdatedCustomers =(customer)=> customers.map((customerItem) => {
+      if (customerItem.customerId === customer.customerId) {                    
+        return { ...customerItem, customerId: customer.customerId, 
+          customerName:customer.customerName, 
+          customerAddress:customer.customerAddress};                      
+      }
+      return customerItem;
+    });
+
     const handleEditCustomer=(customer)=>
     {
         axios({
@@ -80,8 +89,11 @@ const CustomerDashboard=()=>{
               },
             },
           })
-            .then((response) => {
-              setCustomers([...customers, customer]);
+            .then((response) => {             
+                
+               const updatedCustomers= getupdatedCustomers(customer)
+               setCustomers(updatedCustomers);                
+
               console.log(response);
               toast.success("Customer updated successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -162,8 +174,11 @@ const CustomerDashboard=()=>{
       }
     return(
         <>   
+              <div style={{marginLeft:"30px"}}>
              <Button positive content="Add Customer" onClick={()=>addForm()} />
-
+             
+             </div>
+             <br></br>
             <Grid>            
                 <Grid.Column width="10">
                     <CustomerTable customers={customers} currentCustomer={currentCustomer} editForm={editForm} deleteCustomer={deleteCustomer} openDelete={openDelete}></CustomerTable>

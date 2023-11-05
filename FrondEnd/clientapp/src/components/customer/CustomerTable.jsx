@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import {Table,Button} from "semantic-ui-react";
 import "../../index.css";
-import ModalConfirmation from "../ConfirmationModal";
 
 const CustomerTable=(props)=>{
 

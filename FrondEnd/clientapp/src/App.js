@@ -3,15 +3,6 @@ import ConfirmationModal from './components/ConfirmationModal';
 
 import NavBar from './components/NavBar';
 import CustomerDashboard from './components/customer/CustomerDashboard';
-import CustomerEdit from './components/customer/CustomerEdit';
-import PaginationComponent from './components/YourComponent';
-
-
-// import { BrowserRouter as Router, Route } from 'react-router-dom'
-//import {BrowserRouter as Router, Route} from 'react-router-dom'
-// import Update from './components/update';
-// import Read from './components/read';
-// import AppRoutes from './AppRoutes';
 
 function App() {
 

@@ -1,13 +1,11 @@
 import { Grid, Button } from "semantic-ui-react";
 import CustomerTable from "./CustomerTable";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomerEdit from "./CustomerEdit";
 import "react-toastify/dist/ReactToastify.css";
 import Pagination from "../Pagination";
 import "../../customer.css";
 import CustomerAdd from "./CustomerAdd";
-
-const CUSTOMER_API_BASE_URL="https://localhost:7119/api/customers";
 
 const CustomerDashboard=(props)=>{
 

@@ -29,7 +29,7 @@ const CustomerAdd=(props)=>
             });
             return;
         }
-        props.handleSubmit(customer);
+        props.createCustomer(customer);
         setCustomer(initialState);
     }
 

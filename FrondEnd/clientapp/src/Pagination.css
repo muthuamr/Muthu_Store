@@ -1,7 +1,10 @@
 /* Pagination.css */
 .pagination {
-    display: flex;
-    list-style: none;
+  position: relative; 
+  left: 30px;
+  width: fit-content;
+  background-color:transparent;
+  z-index: 1000;    
   }
   
   .page-item {
@@ -10,15 +13,16 @@
   
   .page-link {
     text-decoration: none;
-    background: #007bff;
+    background: lightsteelblue;
     color: #fff;
-    border: 1px solid #007bff;
+    border: 1px solid lightsteelblue;
     border-radius: 3px;
     padding: 10px 20px;
   }
   
   .page-link:hover {
-    background: #0056b3;
+    background: lightsteelblue;
+    color: #fff;
   }
   
   .active .page-link {

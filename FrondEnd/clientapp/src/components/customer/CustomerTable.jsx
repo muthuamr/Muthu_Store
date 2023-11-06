@@ -2,23 +2,25 @@ import { Fragment } from "react";
 import {Table,Button} from "semantic-ui-react";
 import "../../index.css";
 
+
 const CustomerTable=(props)=>{
     return(
-    <Fragment>
+       <>
         <h1 style={{marginLeft:"30px"}}>Customers List</h1>
+        <div className="grid-layout">
         <Table celled style={{
-          marginLeft: "30px",
-          marginTop: "30px"       
+         
          
         }} 
       >
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>Customer Name</Table.HeaderCell>
-                    <Table.HeaderCell>Address</Table.HeaderCell>                    
+                    <Table.HeaderCell style={{ width: '220px' }}>Customer Name</Table.HeaderCell>
+                    <Table.HeaderCell style={{ width: '450px' }}>Address</Table.HeaderCell>                    
                     <Table.HeaderCell>Actions</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
+           
             <Table.Body>
                 {props.currentCustomer.map((customer)=>(               
                 <Table.Row key={customer.customerId}>
@@ -31,8 +33,13 @@ const CustomerTable=(props)=>{
                 </Table.Row>
                  ))}
             </Table.Body>
-        </Table>
-    </Fragment>
+           
+        </Table>     
+       
+       
+  
+    </div>
+    </>
     );
 
 }

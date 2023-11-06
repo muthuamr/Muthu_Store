@@ -9,3 +9,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.grid-layout {
+  display: block;
+  overflow-y: auto;
+  height: 555px;
+  border-style: ridge;
+  /* width: auto; */
+  margin-left: 30px;
+  background-color: whitesmoke;
+}
+

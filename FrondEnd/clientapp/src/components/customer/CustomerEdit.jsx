@@ -15,7 +15,7 @@ const CustomerEdit=(props)=>
     const handleSubmit=(event)=>
     {
         event.preventDefault();
-        props.handleEditCustomer(customer);       
+        props.updateCustomer(customer);       
     }
 
     const handleInputChange=(event)=>

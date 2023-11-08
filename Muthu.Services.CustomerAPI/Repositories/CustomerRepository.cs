@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Muthu.Infrastructure.Peristence.Models;
+using Muthu.Infrastructure.Models;
 using Muthu.MicroService.Repositories.IRepositories;
+using System.Data;
 using System.Data.Common;
 
 namespace Muthu.MicroService.Repositories
@@ -22,24 +23,47 @@ namespace Muthu.MicroService.Repositories
                 int recordsAffected = await _muthuStoreContext.SaveChangesAsync();
                 return recordsAffected;
             }
+            catch (DBConcurrencyException ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
             catch (DbException ex)
             {
-                throw new Exception("Database error occurred", ex);
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
             }
 
         }
 
         public async Task<int> DeleteCustomer(int id)
         {
-            var toDeleteCustomer = _muthuStoreContext.Customers.FindAsync(id);
-
-            int recordsAffected = 0;
-            if (toDeleteCustomer != null)
+            try
             {
-                _muthuStoreContext.Customers.Remove(toDeleteCustomer.Result);
-                recordsAffected = await _muthuStoreContext.SaveChangesAsync();
+                var toDeleteCustomer = await _muthuStoreContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
+
+                int recordsAffected = 0;
+                if (toDeleteCustomer != null)
+                {
+                    _muthuStoreContext.Customers.Remove(toDeleteCustomer);
+                    recordsAffected = await _muthuStoreContext.SaveChangesAsync();
+                }
+                return recordsAffected;
             }
-            return recordsAffected;
+            catch (DBConcurrencyException ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
         }
 
         public Task<IEnumerable<Customer>> GetCustomerAsync(int id)
@@ -49,7 +73,7 @@ namespace Muthu.MicroService.Repositories
 
         public async Task<IEnumerable<Customer>> GetCustomersAsync()
         {
-            return _muthuStoreContext.Customers.ToList();
+            return await _muthuStoreContext.Customers.ToListAsync();
         }
 
         public async Task<int> UpdateCustomer(Customer customer)
@@ -60,11 +84,20 @@ namespace Muthu.MicroService.Repositories
                 int recordsAffected = await _muthuStoreContext.SaveChangesAsync();
                 return recordsAffected;
             }
-            catch (DbException ex)
+            catch (DBConcurrencyException ex)
             {
-                throw new Exception("Database error occurred", ex);
+                throw new Exception($"Create customer failed and error is {ex}");
             }
-
+            catch (DbUpdateException ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Create customer failed and error is {ex}");
+            }
         }
+
     }
 }
+

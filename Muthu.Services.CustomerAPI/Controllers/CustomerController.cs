@@ -30,7 +30,7 @@ namespace Muthu.Services.CustomerAPI.Controllers
             }
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<ActionResult<ResponseDto>> CreateCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
             _responseDto = await _customerService.CreateCustomer(customerCreateDto);
@@ -44,7 +44,7 @@ namespace Muthu.Services.CustomerAPI.Controllers
             }
         }
 
-        [HttpPut("{CustomerId}")]
+        [HttpPut("{customerId}")]
         public async Task<ActionResult<ResponseDto>> UpdateCustomer([FromBody] CustomerDto customerDto)
         {
             _responseDto = await _customerService.UpdateCustomer(customerDto);
@@ -58,10 +58,10 @@ namespace Muthu.Services.CustomerAPI.Controllers
             }
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<ResponseDto>> DeleteCustomer(int Id)
+        [HttpDelete("{customerId}")]
+        public async Task<ActionResult<ResponseDto>> DeleteCustomer(int customerId)
         {
-            _responseDto = await _customerService.DeleteCustomer(Id);
+            _responseDto = await _customerService.DeleteCustomer(customerId);
             if (_responseDto.IsSuccess)
             {
                 return Ok(_responseDto);

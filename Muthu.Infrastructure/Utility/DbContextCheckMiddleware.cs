@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Muthu.Infrastructure.Peristence.Models;
+using Muthu.Infrastructure.Models;
 
 namespace Muthu.Infrastructure.Utility
 {
@@ -26,24 +26,5 @@ namespace Muthu.Infrastructure.Utility
         }
 
 
-        //private readonly RequestDelegate _next;
-
-        //public DbContextCheckMiddleware(RequestDelegate next)
-        //{
-        //    _next = next;
-        //}
-
-        //public async Task Invoke(HttpContext context, MuthuStoreContext dbContext)
-        //{
-        //    if (dbContext == null)
-        //    {
-        //        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        //        await context.Response.WriteAsync("Database context is not available.");
-        //    }
-        //    else
-        //    {
-        //        await _next(context);
-        //    }
-        //}
     }
 }

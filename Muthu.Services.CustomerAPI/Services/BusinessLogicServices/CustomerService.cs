@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Muthu.Infrastructure.Peristence.Models;
+using Muthu.Infrastructure.Models;
 using Muthu.MicroService.Models.Dtos;
 using Muthu.MicroService.Repositories.IRepositories;
 using Muthu.MicroService.Services.IServices;
@@ -11,20 +11,20 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
     {
 
         private readonly ICustomerRepository _customerRepository;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapperCustomer;
         private ResponseDto _responseDto;
         private int recordsAffected = 0;
-        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapperCustomer)
         {
             _customerRepository = customerRepository;
-            _mapper = mapper;
+            _mapperCustomer = mapperCustomer;
             _responseDto = new ResponseDto();
         }
 
         public async Task<ResponseDto> CreateCustomer(CustomerCreateDto customerDto)
         {
             int recordsAffected = 0;
-            Customer customer = _mapper.Map<Customer>(customerDto);
+            Customer customer = _mapperCustomer.Map<Customer>(customerDto);
             if (customer != null)
             {
                 customer.IsActive = true;
@@ -32,7 +32,7 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
             }
             if (recordsAffected > 0)
             {
-                CustomerDto customerDtos = _mapper.Map<CustomerDto>(customer);
+                CustomerDto customerDtos = _mapperCustomer.Map<CustomerDto>(customer);
                 _responseDto.Result = customerDtos;
                 _responseDto.IsSuccess = true;
                 _responseDto.Message = "Customer Added Successfully!";
@@ -48,7 +48,7 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
         public async Task<ResponseDto> UpdateCustomer(CustomerDto customerDto)
         {
             recordsAffected = 0;
-            Customer customer = _mapper.Map<Customer>(customerDto);
+            Customer customer = _mapperCustomer.Map<Customer>(customerDto);
             if (customer != null)
             {
                 customer.IsActive = true;
@@ -90,8 +90,9 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
             IEnumerable<Customer> objCustomerLit = await _customerRepository.GetCustomersAsync();
             if (objCustomerLit != null)
             {
-                IEnumerable<CustomerDto> objCustomerDtoLit = _mapper.Map<IEnumerable<CustomerDto>>(objCustomerLit);
+                IEnumerable<CustomerDto> objCustomerDtoLit = _mapperCustomer.Map<IEnumerable<CustomerDto>>(objCustomerLit);
                 _responseDto.Result = objCustomerDtoLit;
+                _responseDto.IsSuccess = true;
             }
             else
             {

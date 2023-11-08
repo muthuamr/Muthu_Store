@@ -1,12 +1,13 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Muthu.Infrastructure.Peristence.Models;
+using Muthu.Infrastructure.Models;
 using Muthu.Infrastructure.Utility;
 using Muthu.MicroService.Mapper;
 using Muthu.MicroService.Repositories;
 using Muthu.MicroService.Repositories.IRepositories;
 using Muthu.MicroService.Services.BusinessLogicServices;
 using Muthu.MicroService.Services.IServices;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +24,12 @@ builder.Services.AddDbContext<MuthuStoreContext>(options => options.UseSqlServer
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
-IMapper mapper = CustomerMappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 //builder.Services.AddCors(options =>
 //{

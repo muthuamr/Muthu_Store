@@ -1,4 +1,4 @@
-﻿using Muthu.Infrastructure.Peristence.Models;
+﻿using Muthu.Infrastructure.Models;
 
 namespace Muthu.MicroService.Repositories.IRepositories
 {

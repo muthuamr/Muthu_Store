@@ -53,15 +53,21 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
                 if (objProduct != null)
                 {
                     objProduct.IsActive = true;
-                    int affectedRecords = await _productRepoitory.CreateProduct(objProduct);
-                    if (affectedRecords > 0)
+                    Product objCreatedProduct = await _productRepoitory.CreateProduct(objProduct);
+                    if (objCreatedProduct != null)
                     {
-                        _responseDto.IsSuccess = true;
-                        _responseDto.Message = $"Product '{objProduct.Description}' Added successfully";
-                    }
-                    else
-                    {
-                        _responseDto.Message = $"Product '{objProduct.Description}' failed to add";
+                        ProductDto objProductDto = _mapperProduct.Map<ProductDto>(objCreatedProduct);
+
+                        if (objProductDto.ProductId > 0)
+                        {
+                            _responseDto.Result = objProductDto;
+                            _responseDto.IsSuccess = true;
+                            _responseDto.Message = $"Product '{objProduct.Name}' Added successfully";
+                        }
+                        else
+                        {
+                            _responseDto.Message = $"Product '{objProduct.Name}' failed to add";
+                        }
                     }
 
                 }
@@ -74,7 +80,7 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
             }
             catch (Exception ex)
             {
-                _responseDto.Message = $"Error is occured while creating a new product {(objProduct != null ? objProduct.Description : string.Empty)} {ex}";
+                _responseDto.Message = $"Error is occured while creating a new product {(objProduct != null ? objProduct.Name : string.Empty)} {ex}";
 
             }
             return _responseDto;
@@ -93,11 +99,11 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
                     if (recordsAffected > 0)
                     {
                         _responseDto.IsSuccess = true;
-                        _responseDto.Message = $"Product '{objProduct.Description}' updated successfully";
+                        _responseDto.Message = $"Product '{objProduct.Name}' updated successfully";
                     }
                     else
                     {
-                        _responseDto.Message = $"Product '{objProduct.Description}' failed to update";
+                        _responseDto.Message = $"Product '{objProduct.Name}' failed to update";
                     }
                 }
                 else
@@ -107,7 +113,7 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
             }
             catch (Exception ex)
             {
-                _responseDto.Message = $"Product '{(objProduct != null ? objProduct.Description : string.Empty)}' failed to update and error is {ex}";
+                _responseDto.Message = $"Product '{(objProduct != null ? objProduct.Name : string.Empty)}' failed to update and error is {ex}";
             }
 
             return _responseDto;

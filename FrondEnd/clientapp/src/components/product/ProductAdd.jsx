@@ -24,18 +24,20 @@ const ProductAdd=(props)=> {
         if(name=="productPrice")
         {
             if (/^-?\d*\.?\d*$/.test(value)) {
-                setProduct({...product,[name]:[value]}); 
+                setProduct({...product,[name]:value}); 
               }
         }
         else
-            setProduct({...product,[name]:[value]});    
+            setProduct({...product,[name]:value});    
     }
    
 
-    const handleSubmit=()=>
+    const handleSubmit=(event)=>
     {
+        event.preventDefault();
+        props.createProduct(product);
         setProduct(initialState);
-        props.toastMessage("success","Product Added Successfully");   
+        //props.toastMessage("success","Product Added Successfully");   
     }
 
     return (
@@ -43,8 +45,9 @@ const ProductAdd=(props)=> {
         <Modal.Header closeButton>
             <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
-        <Modal.Body>           
-            <Form.Group >
+        <Modal.Body>   
+            <Form>  
+            <Form.Group controlId="formgroup">
                 <Form.Label>Product Name: </Form.Label>
                 <Form.Control as="textarea" name='productName' onChange={handleChange} value={product.productName}/>                
                 <br></br>
@@ -52,15 +55,17 @@ const ProductAdd=(props)=> {
                 <Form.Control type="text" name="productPrice" onChange={handleChange} value={product.productPrice}/>  
                 {/* <Form.Control placeholder="Product Name" value={product.productName} name="productName" onChange={handleChange}></Form.Control>        */}
             </Form.Group>
-          
+            </Form>    
         </Modal.Body>
         <Modal.Footer>
+        <Form onSubmit={handleSubmit}>  
         <Button variant="secondary" onClick={props.handleCloseAddForm}>
           Close
         </Button>
-            <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
+            <Button variant="primary" type="submit">
                 Submit
             </Button>
+            </Form>
         </Modal.Footer>
         </Modal>
     );

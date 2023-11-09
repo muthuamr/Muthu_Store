@@ -1,13 +1,13 @@
 import { useState } from "react";
 import ConfirmationModal from "../ConfirmationModal";
 import ProductTable from "./ProductTable";
-import { ToastContainer, toast } from "react-toastify";
 import ProductAdd from "./ProductAdd";
 
 const ProductDashboard=(props)=>
 {
     const [showConfirmation, setShowConfirmation]=useState(false);
     const [showAddForm,setshowAddForm]=useState(false);
+    const [product, setProduct]=useState([]);
    
     const handleCloseAddForm=()=>{setshowAddForm(false);}
 
@@ -18,26 +18,17 @@ const ProductDashboard=(props)=>
 
     const handleConfirmDelete=()=>
     {
+        props.deleteProduct(product);
         setShowConfirmation(false);
-        toastMessage("success","Deleted successfully");
     }
 
-    const handleOpenDelete=()=>
+    const handleOpenDelete=(product)=>
     {
+        setProduct(product);
         setShowConfirmation(true);
     }
 
-    const toastMessage=(messageType,message)=>
-    {
-        if(messageType=="success")
-        {
-            toast.success(message,{position:toast.POSITION.TOP_RIGHT});
-        }
-        else if(messageType=="fail")
-        {
-            toast.error(message,{position:toast.POSITION.TOP_RIGHT});
-        }
-    }
+    
     const handleShowAddForm=()=>
     {
         setshowAddForm(true);
@@ -45,7 +36,7 @@ const ProductDashboard=(props)=>
     return(
         <>
              <ProductTable products={props.products} handleOpenDelete={handleOpenDelete} handleShowAddForm={handleShowAddForm}></ProductTable>
-             {showAddForm && <ProductAdd toastMessage={toastMessage} handleCloseAddForm={handleCloseAddForm}></ProductAdd>}
+             {showAddForm && <ProductAdd handleCloseAddForm={handleCloseAddForm} createProduct={props.createProduct}></ProductAdd>}
 
              <ConfirmationModal
                 show={showConfirmation}
@@ -54,8 +45,6 @@ const ProductDashboard=(props)=>
                 title="Confirm Delete"
                 message="Are you sure you want to delete this item?"
                 product={props.product}/>
-
-                <ToastContainer position="top-centere"></ToastContainer>
         </>
     )
 }

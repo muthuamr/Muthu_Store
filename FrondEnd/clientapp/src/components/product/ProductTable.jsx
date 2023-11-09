@@ -18,10 +18,10 @@ const ProductTable=(props)=>
                 <TableBody>
                 {props.products.map((product)=>(                
                 <TableRow key={product.productId}>
-                    <TableCell>{product.productDescription}</TableCell>
+                    <TableCell>{product.productName}</TableCell>
                     <TableCell>{product.productPrice}</TableCell>
                     <TableCell><Button positive onClick={()=>props.handleShowAddForm()}>Edit</Button>
-                    <Button negative onClick={()=>props.handleOpenDelete()}>Delete</Button></TableCell>                                  
+                    <Button negative onClick={()=>props.handleOpenDelete(product)}>Delete</Button></TableCell>                                  
                 </TableRow>
                 ))}
                 </TableBody>

@@ -11,12 +11,13 @@ namespace Muthu.MicroService.Repositories
         {
             _muthuStoreContext = storeContext;
         }
-        public async Task<int> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
             try
             {
                 _muthuStoreContext.Products.Add(product);
-                return await _muthuStoreContext.SaveChangesAsync();
+                await _muthuStoreContext.SaveChangesAsync();
+                return product;
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -42,7 +43,7 @@ namespace Muthu.MicroService.Repositories
                 {
                     _muthuStoreContext.Products.Remove(toDeleteProduct);
                     noofrecordsaffected = await _muthuStoreContext.SaveChangesAsync();
-                    return (noofrecordsaffected, toDeleteProduct.Description);
+                    return (noofrecordsaffected, toDeleteProduct.Name);
                 }
                 else
                     return (noofrecordsaffected, string.Empty);
@@ -76,7 +77,7 @@ namespace Muthu.MicroService.Repositories
                 var toUpdateProduct = _muthuStoreContext.Products.FirstOrDefault(x => x.Id == product.Id);
                 if (toUpdateProduct != null)
                 {
-                    toUpdateProduct.Description = product.Description;
+                    toUpdateProduct.Name = product.Name;
                     toUpdateProduct.Price = product.Price;
 
                     _muthuStoreContext.Entry(toUpdateProduct).State = EntityState.Modified;

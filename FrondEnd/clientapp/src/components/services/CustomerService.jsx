@@ -15,11 +15,11 @@ const CustomerService=()=>
     const [showConfirmation, setShowConfirmation] = useState(false);
     
     useEffect(()=>{
-        axios.get(CUSTOMER_API_BASE_URL).then((response)=>{
-          if(response.data.isSuccess)
-          {
-              setCustomers(response.data.result);
-          }
+    axios.get(CUSTOMER_API_BASE_URL).then((response)=>{
+    if(response.data.isSuccess)
+    {
+        setCustomers(response.data.result);
+    }
         });
     },[]);
 
@@ -46,13 +46,13 @@ const CustomerService=()=>
               console.log(response);
               data.customerId=response.data.result.customerId;
               setCustomers([...customers,data]);
-              toast.success("Customer added successfully",{
+              toast.success(response.data.message,{
                   position:toast.POSITION.TOP_RIGHT
               });
           }
           else
           {
-            console.log("The API failed"+response);
+            console.log("The API failed"+response.data.message);
           }
          
         }).catch((error)=>{
@@ -80,15 +80,22 @@ const CustomerService=()=>
             },
           })
             .then((response) => {             
-                
+              if(response.data.isSuccess)
+              {
                const updatedCustomers= getupdatedCustomers(customer)
                setCustomers(updatedCustomers);                
 
               console.log(response);
-              toast.success("Customer updated successfully", {
+              toast.success(response.data.message, {
                 position: toast.POSITION.TOP_RIGHT,
               });
+            }
+            else{
+              console.log("The API failed"+response.data.message);
+            }
+            
             })
+            
             .catch((error) => {
               console.log("the error has occured: " + error);
             });
@@ -98,10 +105,16 @@ const CustomerService=()=>
     const deleteCustomer=()=>
     {
         setCustomer("");
-        axios.delete(`${CUSTOMER_API_BASE_URL}/${customer.customerId}`).then(()=>{
-            toast.success("Customer deleted successfully", {
+        axios.delete(`${CUSTOMER_API_BASE_URL}/${customer.customerId}`).then((response)=>{
+          if(response.data.isSuccess)
+          {
+            toast.success(response.data.message, {
                 position:toast.POSITION.TOP_RIGHT
             });
+          }
+          else{
+            console.log("The API failed"+response.data.message);
+          }
         });
 
         setCustomers([...customers.filter((x)=>x.customerId!==customer.customerId)]);

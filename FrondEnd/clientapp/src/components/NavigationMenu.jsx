@@ -13,11 +13,12 @@ function NavigationMenu() {
     <>     
       <Navbar className="navbar navbar-light" style={{backgroundColor:"lightsteelblue", fontSize:"17px", color:"black",lineHeight:"45px"}}>
         <Container>
-          <Navbar.Brand href="" style={{fontSize:"25px", color:"Orange"}}>Muthu Store</Navbar.Brand>
+          <Navbar.Brand href="" style={{fontSize:"25px", color:"DarkOrange"}}>Welcome Muthu Store</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link style={{color:"black"}} href="/Customers">Customers</Nav.Link>
+            <Nav.Link style={{color:"black"}} href='/Customers'>Customers</Nav.Link>
             <Nav.Link style={{color:"black"}} href="/Products">Products</Nav.Link>
-            <Nav.Link style={{color:"black"}} href="/Sales">Sales</Nav.Link>
+            <Nav.Link style={{color:"black"}} href='/Stores'>Store</Nav.Link>
+            {/* <Nav.Link style={{color:"black"}} href='/Sales'>Sales</Nav.Link>            */}
           </Nav>
         </Container>
       </Navbar>

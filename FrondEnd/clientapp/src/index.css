@@ -10,11 +10,11 @@ code {
     monospace;
 }
 
-
+/*Set hegight for grid view*/
 .grid-layout {
   display: block;
   overflow-y: auto;
-  height: 555px;
+  height: 530px;
   border-style: ridge;
   /* width: auto; */
   margin-left: 30px;

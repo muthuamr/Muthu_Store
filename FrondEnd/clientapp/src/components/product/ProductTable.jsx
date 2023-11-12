@@ -4,8 +4,9 @@ const ProductTable=(props)=>
 {
     return(
         <>
-        <Button positive onClick={()=>props.handleShowAddForm()}>Add Product</Button>
-        <h1>Products List</h1>
+        <Button style={{marginLeft:"30px"}} positive onClick={()=>props.handleShowAddForm()}>Add Product</Button>
+        <h1 style={{marginLeft:"30px"}} >Products List</h1>
+        <div className="grid-layout">
         <Segment>
             <Table>
                 <TableHeader>
@@ -20,13 +21,14 @@ const ProductTable=(props)=>
                 <TableRow key={product.productId}>
                     <TableCell>{product.productName}</TableCell>
                     <TableCell>{product.productPrice}</TableCell>
-                    <TableCell><Button positive onClick={()=>props.handleShowAddForm()}>Edit</Button>
+                    <TableCell><Button positive onClick={()=>props.handleShowEditForm(product)}>Edit</Button>
                     <Button negative onClick={()=>props.handleOpenDelete(product)}>Delete</Button></TableCell>                                  
                 </TableRow>
                 ))}
                 </TableBody>
             </Table>
         </Segment>
+        </div>
         </>
     )
 }

@@ -69,6 +69,47 @@ const ProductService=()=>
         });
     }
 
+    const updateProduct=(product)=>
+    {
+        axios({
+            url:`${PRODUCT_API_URL}/${product.productId}`,
+            method:'PUT',
+            data:{
+                productId:product.productId,
+                productName:product.productName,
+                productPrice:product.productPrice
+            },
+            config:{
+                headers:{
+                    Accept:"application/json",
+                    "Content-Type":"application/json",
+                }
+            }
+        }).then((response)=>{
+            if(response.data.isSuccess)
+            {
+                const toUpdateProducts= getUpdatedProducts(product);
+                setProducts(toUpdateProducts);
+                toast.success(response.data.message);
+            }
+        }).catch((error)=>
+        {
+            console.log(error);
+        });
+    }
+
+    const getUpdatedProducts=(product)=>
+        products.map((productItem)=>{
+            if(productItem.productId===product.productId)
+            {
+                return { ...productItem,
+                productId: product.productId,
+                productName: product.productName,
+                productPrice: product.productPrice};
+            }
+            return productItem;
+        });
+
     const deleteProduct=(product)=>
     {
         axios.delete(`${PRODUCT_API_URL}/${product.productId}`).
@@ -96,7 +137,8 @@ const ProductService=()=>
              products={products} 
              product={product} 
              createProduct={createProduct}
-             deleteProduct={deleteProduct}>
+             deleteProduct={deleteProduct}
+             updateProduct={updateProduct}>
              </ProductDashboard>
 
              <ToastContainer position="top-right"></ToastContainer>

@@ -22,7 +22,7 @@ const CustomerTable=(props)=>{
             </Table.Header>
            
             <Table.Body>
-                {props.currentCustomer.map((customer)=>(               
+                {props.currentCustomersForPage.map((customer)=>(               
                 <Table.Row key={customer.customerId}>
                 <Table.Cell>{customer.customerName}</Table.Cell>
                 <Table.Cell>{customer.customerAddress}</Table.Cell>

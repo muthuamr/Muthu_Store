@@ -27,8 +27,21 @@ namespace Muthu.MicroService.Mapper
                 ForMember(dest => dest.ProductPrice, src => src.MapFrom(src => src.Price)).ReverseMap();
 
                 config.CreateMap<Product, ProductDto>().
-                ForMember(dest => dest.ProductId, src => src.MapFrom(src => src.Id)).IncludeBase<Product, ProductCreateDto>().
+                ForMember(dest => dest.ProductId, src => src.MapFrom(src => src.Id)).
+                IncludeBase<Product, ProductCreateDto>().
                 ReverseMap();
+
+                //Store
+                config.CreateMap<Store, StoreCreateDto>().
+                ForMember(dest => dest.StoreName, src => src.MapFrom(src => src.Name)).
+                ForMember(dest => dest.StoreAddress, src => src.MapFrom(src => src.Address)).
+                ReverseMap();
+
+                config.CreateMap<Store, StoreDto>().
+                ForMember(dest => dest.StoreId, src => src.MapFrom(src => src.Id)).
+                IncludeBase<Store, StoreCreateDto>().
+                ReverseMap();
+
             });
 
             return mappingConfig;

@@ -4,7 +4,9 @@
   left: 30px;
   width: fit-content;
   background-color:transparent;
-  z-index: 1000;    
+  z-index: 1000;
+  font-size: larger;
+  margin-top: 10px;   
   }
   
   .page-item {
@@ -13,7 +15,15 @@
   
   .page-link {
     text-decoration: none;
-    background: lightsteelblue;
+    background: rgb(42, 124, 231);
+    color: #fff;
+    border: 1px solid lightsteelblue;
+    border-radius: 3px;
+    padding: 10px 20px;
+  }
+  .page-number{
+    text-decoration: none;
+    background: cornflowerblue;
     color: #fff;
     border: 1px solid lightsteelblue;
     border-radius: 3px;
@@ -24,7 +34,13 @@
     background: lightsteelblue;
     color: #fff;
   }
-  
+  .active{
+    background:blue;
+  }
+  .disabled{
+    background: lightgrey;
+  }
+
   .active .page-link {
     background: #b35f00;
   }

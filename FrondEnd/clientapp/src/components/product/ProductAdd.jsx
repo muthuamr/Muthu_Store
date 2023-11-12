@@ -2,6 +2,7 @@
 import Form from 'react-bootstrap/Form';
 import { Modal, Button } from 'react-bootstrap';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ProductAdd=(props)=> {
     const [show,setShow]=useState();
@@ -12,7 +13,7 @@ const ProductAdd=(props)=> {
     const initialState=
     {
         productName:"",
-        productPrice:0.00
+        productPrice:"0.00"
     };
 
     const [product, setProduct]=useState(initialState);
@@ -35,13 +36,27 @@ const ProductAdd=(props)=> {
     const handleSubmit=(event)=>
     {
         event.preventDefault();
+        if(!product.productName)
+        {
+            toast.error('Product Name is required!');
+            return;
+        }
+        if(!product.productPrice || product.productPrice<=0)
+        {
+            toast.error('Product price is required!');
+            return;
+        }
+        if(isNaN(parseFloat(product.productPrice)))
+        {
+            toast.error('Product price accept integer or decimal values only!');
+            return;
+        }
         props.createProduct(product);
         setProduct(initialState);
-        //props.toastMessage("success","Product Added Successfully");   
     }
 
     return (
-    <Modal show={isOpen} onHide={props.handleCloseAddForm} backdrop="static">
+    <Modal show={isOpen} onHide={props.handleCloseForm} backdrop="static">
         <Modal.Header closeButton>
             <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
@@ -49,24 +64,23 @@ const ProductAdd=(props)=> {
             <Form>  
             <Form.Group controlId="formgroup">
                 <Form.Label>Product Name: </Form.Label>
-                <Form.Control as="textarea" name='productName' onChange={handleChange} value={product.productName}/>                
+                <Form.Control as="textarea" placeholder='E.g. Product Name or Product Description' name='productName' onChange={handleChange} value={product.productName} minLength={1} maxLength={150}/>                
                 <br></br>
                 <Form.Label>Product Price: </Form.Label>
-                <Form.Control type="text" name="productPrice" onChange={handleChange} value={product.productPrice}/>  
-                {/* <Form.Control placeholder="Product Name" value={product.productName} name="productName" onChange={handleChange}></Form.Control>        */}
+                <Form.Control type="text" placeholder='Enter Decimal amount' name="productPrice" onChange={handleChange} value={product.productPrice} minLength={1} maxLength={11}/>  
             </Form.Group>
             </Form>    
         </Modal.Body>
-        <Modal.Footer>
         <Form onSubmit={handleSubmit}>  
-        <Button variant="secondary" onClick={props.handleCloseAddForm}>
+        <Modal.Footer>       
+        <Button variant="secondary" onClick={props.handleCloseForm}>
           Close
         </Button>
             <Button variant="primary" type="submit">
                 Submit
-            </Button>
-            </Form>
+            </Button>           
         </Modal.Footer>
+        </Form>
         </Modal>
     );
 }

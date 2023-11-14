@@ -1,4 +1,4 @@
-﻿using Muthu.MicroService.Models.Dtos;
+﻿using Muthu.MicroService.ViewModel;
 
 namespace Muthu.MicroService.Services.IServices
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Muthu.MicroService.Models.Dtos;
 using Muthu.MicroService.Services.IServices;
+using Muthu.MicroService.ViewModel;
 
 namespace Muthu.MicroService.Controllers
 {

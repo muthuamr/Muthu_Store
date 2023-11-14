@@ -1,4 +1,4 @@
-﻿namespace Muthu.MicroService.Models.Dtos
+﻿namespace Muthu.MicroService.ViewModel
 {
     public class CustomerCreateDto
     {

@@ -21,8 +21,10 @@ const StoreTable=(props)=>
                     <Card.Description>{store.storeAddress}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Button positive onClick={()=>props.handleShowEditForm(store)}>Edit</Button>
-                        <Button onClick={()=>props.handleOpenDelete(store)}>Delete</Button>
+                        <div className='ui two buttons'>
+                        <Button basic color='green' onClick={()=>props.handleShowEditForm(store)}>Edit</Button>
+                        <Button basic color='red' onClick={()=>props.handleOpenDelete(store)}>Delete</Button>
+                        </div>
                     </Card.Content>
                 </Card>
                 </Grid.Column>

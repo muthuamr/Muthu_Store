@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Muthu.Infrastructure.Models;
-using Muthu.MicroService.Models.Dtos;
 using Muthu.MicroService.Repositories.IRepositories;
 using Muthu.MicroService.Services.IServices;
+using Muthu.MicroService.ViewModel;
 
 namespace Muthu.MicroService.Services.BusinessLogicServices
 {

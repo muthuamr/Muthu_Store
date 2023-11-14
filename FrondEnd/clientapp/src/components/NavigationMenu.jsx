@@ -17,8 +17,8 @@ function NavigationMenu() {
           <Nav className="me-auto">
             <Nav.Link style={{color:"black"}} href='/Customers'>Customers</Nav.Link>
             <Nav.Link style={{color:"black"}} href="/Products">Products</Nav.Link>
-            <Nav.Link style={{color:"black"}} href='/Stores'>Store</Nav.Link>
-            {/* <Nav.Link style={{color:"black"}} href='/Sales'>Sales</Nav.Link>            */}
+            <Nav.Link style={{color:"black"}} href='/Stores'>Stores</Nav.Link>
+            <Nav.Link style={{color:"black"}} href='/Sales'>Sales</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -7,6 +7,8 @@ import { useState } from "react";
 const SaleDashboard=(props)=>
 {
     const [showConfirmation, setShowConfirmation]=useState(false);
+
+    
     const handleCancelDelete=()=>
     {
 
@@ -34,7 +36,7 @@ const SaleDashboard=(props)=>
                 message="Are you sure you want to delete this item?"
                 product={props.sale}/>
 
-        <SaleAdd></SaleAdd>
+        <SaleAdd products={props.products}></SaleAdd>
         <SaleEdit></SaleEdit>
         <SaleTable
         handleOpenDelete={handleOpenDelete}

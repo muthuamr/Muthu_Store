@@ -9,7 +9,7 @@ const SaleTable=(props)=>
     <div>
     <h1>Store List</h1>
     <div className="grid-layout">
-
+        
     <Container style={{ padding: '5em 0em' }}>
     
     <Message attached='top' content='Sales History' icon='' warning />

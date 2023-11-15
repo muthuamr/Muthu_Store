@@ -1,39 +1,31 @@
 import { useEffect, useState } from "react";
-import {API_URL} from '../../App';
+import {API_PRODUCT_URL} from '../../App';
 import axios from "axios";
 import ProductDashboard from "../product/ProductDashboard";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchData } from "../utility/fetchDataAPI";
 
 const ProductService=()=>
 {
     const [products, setProducts]=useState([]);
     const [product, setProduct]=useState([]);
-    const PRODUCT_API_URL=`${API_URL}/products`;
+    const [loading, setLoading] = useState(true);
    
-
-    useEffect(()=>{
-
-        axios.get(PRODUCT_API_URL).then((response)=>{
-            if(response.data.isSuccess)
+        useEffect(()=>{
+            const getProductList=async ()=>
             {
-                setProducts(response.data.result);
-            }
-            else{
-                console.log(PRODUCT_API_URL+"failed");
-            }
-        }).catch((error)=>{
-            if(error.response && error.response.status===404)
-            {
-                toast.error(error.response.message,{POSITION:toast.POSITION.TOP_RIGHT});
-            }
-            else
-            {
-                toast.error(error.response.message,{POSITION:toast.POSITION.TOP_RIGHT});
-            }
-        });
-    },[])
-
+              await fetchData(API_PRODUCT_URL).then(result=>{
+                setProducts(result);
+              }).catch(error=>{                
+                toast.error(error,{POSITION:toast.POSITION.TOP_RIGHT});
+              }).finally(()=>{
+                setLoading(false);
+              })             
+            };
+            getProductList();
+            },[]);
+       
     const createProduct=(product)=>
     {
         const data={
@@ -43,7 +35,7 @@ const ProductService=()=>
 
         axios({
             method:"post",
-            url:`${PRODUCT_API_URL}/create`,
+            url:`${API_PRODUCT_URL}/create`,
             data:data,
             config:{
                 headers:{
@@ -61,18 +53,18 @@ const ProductService=()=>
             }
             else
             {
-                console.log(`${PRODUCT_API_URL} failed`);
+                console.log(`${API_PRODUCT_URL} failed`);
             }
         }).catch((error)=>
         {
-            console.log(`${PRODUCT_API_URL} error: ${error}`);
+            console.log(`${API_PRODUCT_URL} error: ${error}`);
         });
     }
 
     const updateProduct=(product)=>
     {
         axios({
-            url:`${PRODUCT_API_URL}/${product.productId}`,
+            url:`${API_PRODUCT_URL}/${product.productId}`,
             method:'PUT',
             data:{
                 productId:product.productId,
@@ -112,7 +104,7 @@ const ProductService=()=>
 
     const deleteProduct=(product)=>
     {
-        axios.delete(`${PRODUCT_API_URL}/${product.productId}`).
+        axios.delete(`${API_PRODUCT_URL}/${product.productId}`).
         then((response)=>
         {
            if(response.data.isSuccess)
@@ -132,14 +124,17 @@ const ProductService=()=>
     }
 
     return(
-        <>      
+        <>   
+             {loading ? (
+                 <p>Loading...</p>
+            ) :(
              <ProductDashboard 
              products={products} 
              product={product} 
              createProduct={createProduct}
              deleteProduct={deleteProduct}
              updateProduct={updateProduct}>
-             </ProductDashboard>
+             </ProductDashboard>)}
 
              <ToastContainer position="top-right"></ToastContainer>
         </>
@@ -147,3 +142,5 @@ const ProductService=()=>
 }
 
 export default ProductService;
+  
+   

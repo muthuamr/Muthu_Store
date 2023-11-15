@@ -7,6 +7,7 @@ import StoreService from './components/services/StoreService';
 import SaleService from './components/services/SaleService';
 
 export const API_URL = 'https://localhost:7119/api';
+export const API_PRODUCT_URL = 'https://localhost:7119/api/products';
 
 function App() {
 

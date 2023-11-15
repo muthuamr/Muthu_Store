@@ -90,30 +90,31 @@ const ModalExampleScrollingContent = () => {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <Modal
-      open={open}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      trigger={<Button>Scrolling Content Modal</Button>} backdrop={"static"}>
-      <Modal.Header>Profile Picture</Modal.Header>
-      <Modal.Content>
-        {/* <Image size='medium' src='/images/wireframe/image.png' wrapped /> */}
+    <></>
+    // <Modal
+    //   open={open}
+    //   onClose={() => setOpen(false)}
+    //   onOpen={() => setOpen(true)}
+    //   trigger={<Button>Scrolling Content Modal</Button>} backdrop={"static"}>
+    //   <Modal.Header>Profile Picture</Modal.Header>
+    //   <Modal.Content>
+    //     {/* <Image size='medium' src='/images/wireframe/image.png' wrapped /> */}
 
-        <Modal.Description>
-          <p>
-            This is an example of expanded content that will cause the modal's
-            dimmer to scroll.
-          </p>
+    //     <Modal.Description>
+    //       <p>
+    //         This is an example of expanded content that will cause the modal's
+    //         dimmer to scroll.
+    //       </p>
 
           
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={() => setOpen(false)} primary>
-          Proceed <Icon name='chevron right' />
-        </Button>
-      </Modal.Actions>
-    </Modal>
+    //     </Modal.Description>
+    //   </Modal.Content>
+    //   <Modal.Actions>
+    //     <Button onClick={() => setOpen(false)} primary>
+    //       Proceed <Icon name='chevron right' />
+    //     </Button>
+    //   </Modal.Actions>
+    // </Modal>
   )
 }
 

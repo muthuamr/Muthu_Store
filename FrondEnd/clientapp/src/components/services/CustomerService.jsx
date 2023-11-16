@@ -3,9 +3,8 @@ import { toast, ToastContainer } from "react-toastify";
 import CustomerDashboard from "../customer/CustomerDashboard";
 import { useEffect, useState } from "react";
 import ConfirmationModal from '../ConfirmationModal';
-
-const CUSTOMER_API_BASE_URL="https://localhost:7119/api/customers";
-
+import {API_CUSTOMER_URL} from '../../App';
+import { fetchData } from "../utility/fetchDataAPI";
 const CustomerService=()=>
 {
     const [customers, setCustomers]=useState([]);
@@ -13,14 +12,26 @@ const CustomerService=()=>
     const [showAddForm, setshowAddForm]=useState(false);
     const [showEditForm, setshowEditForm]=useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [loading, setLoading]=useState(true);
     
     useEffect(()=>{
-    axios.get(CUSTOMER_API_BASE_URL).then((response)=>{
-    if(response.data.isSuccess)
+    const getCustomers=async()=>
     {
-        setCustomers(response.data.result);
-    }
-        });
+        await fetchData(API_CUSTOMER_URL).then((result)=>{
+        if(result)
+        {
+            setCustomers(result);
+        }
+      }).catch((error)=>
+      {
+        toast.error(error,{POSITION:toast.POSITION.TOP_RIGHT});
+      }).finally(()=>
+      {
+        setLoading(false);
+      });
+    };
+    getCustomers();
+
     },[]);
 
     const createCustomer=(customer)=>
@@ -32,7 +43,7 @@ const CustomerService=()=>
 
         axios({
             method: "post",
-            url: `${CUSTOMER_API_BASE_URL}/create`,
+            url: `${API_CUSTOMER_URL}/create`,
             data: data,
             config:{
                 headers: {
@@ -66,7 +77,7 @@ const CustomerService=()=>
     {
         axios({
             method: "put",
-            url: `${CUSTOMER_API_BASE_URL}/${customer.customerId}`,
+            url: `${API_CUSTOMER_URL}/${customer.customerId}`,
             data: {
               customerId: customer.customerId,
               customerName: customer.customerName,
@@ -105,7 +116,7 @@ const CustomerService=()=>
     const deleteCustomer=()=>
     {
         setCustomer("");
-        axios.delete(`${CUSTOMER_API_BASE_URL}/${customer.customerId}`).then((response)=>{
+        axios.delete(`${API_CUSTOMER_URL}/${customer.customerId}`).then((response)=>{
           if(response.data.isSuccess)
           {
             toast.success(response.data.message, {
@@ -168,42 +179,25 @@ const CustomerService=()=>
        setShowConfirmation(false);
      };
 
-     
-    // getCustomers()
-    // {
-    //     return axios.get(CUSTOMER_API_BASE_URL);
-    // }
-
-    // createCustomer(customer)
-    // {
-    //     return axios.post(CUSTOMER_API_BASE_URL, customer);
-    // }
-
-    // updateCustomer(customer)
-    // {
-    //     return axios.put(CUSTOMER_API_BASE_URL,customer);
-    // }
-
-    // deleteCustomer(customerId)
-    // {
-    //     return axios.delete(CUSTOMER_API_BASE_URL+"/"+customerId);
-    // }    
-
     return(
         <>
-        <CustomerDashboard 
-            customers={customers}
-            showAddForm={showAddForm}
-            showEditForm={showEditForm}
-            addForm={addForm}
-            editForm={editForm}
-            customer={customer}
-            openDelete={openDelete}
-            deleteCustomer={deleteCustomer}
-            closeForm={closeForm}
-            createCustomer={createCustomer}
-            updateCustomer={updateCustomer}>
-        </CustomerDashboard>
+           {loading ? (
+                 <p>Loading...</p>
+            ) :(
+              <CustomerDashboard 
+                  customers={customers}
+                  showAddForm={showAddForm}
+                  showEditForm={showEditForm}
+                  addForm={addForm}
+                  editForm={editForm}
+                  customer={customer}
+                  openDelete={openDelete}
+                  deleteCustomer={deleteCustomer}
+                  closeForm={closeForm}
+                  createCustomer={createCustomer}
+                  updateCustomer={updateCustomer}>
+              </CustomerDashboard>
+            )}
 
         <ConfirmationModal
             show={showConfirmation}

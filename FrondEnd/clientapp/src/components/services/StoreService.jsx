@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
 import StoreDashboard from "../store/StoreDashboard";
 import axios from "axios";
-import { API_URL } from "../../App";
+import { API_STORE_URL } from "../../App";
 import { toast, ToastContainer } from "react-toastify";
+import { fetchData } from "../utility/fetchDataAPI";
 
 const StoreService=()=>
 {
     const [stores,setStores]=useState([]);
-    const STORE_API_URL=`${API_URL}/store`
+    const [loading, setLoading]=useState(true);
+
     useEffect(()=>{
-        axios.get(STORE_API_URL).then((response)=>
-        {
-            if(response.data.isSuccess)
+        const getStoreList=async ()=>{        
+           await fetchData(API_STORE_URL).then((result)=>
             {
-                setStores(response.data.result);
-            }
-        }).catch((error)=>
-        {
-            if(error.response && error.response.status===404)
+                setStores(result);
+            }).catch((error)=>
             {
-                toast.error(error.response.message);
-            }
-    });
+                toast.error(error.response.message);            
+            }).finally(()=>
+            {
+                setLoading(false);
+            });
+        }
+        getStoreList();
     },[]);
 
     const createStore=(store)=>
@@ -34,7 +36,7 @@ const StoreService=()=>
         axios(
             {
                 method:"post",
-                url:`${STORE_API_URL}/create`,
+                url:`${API_STORE_URL}/create`,
                 data:data,
                 config:{
                     headers:{
@@ -62,7 +64,7 @@ const StoreService=()=>
             storeAddress:store.storeAddress
         }
         axios({
-            url:`${STORE_API_URL}/${store.storeId}`,
+            url:`${API_STORE_URL}/${store.storeId}`,
             method:"PUT",
             data:data,
             config:{
@@ -104,7 +106,7 @@ const StoreService=()=>
             storeId:store.storeId
         }
         axios({
-            url:`${STORE_API_URL}/${store.storeId}`,
+            url:`${API_STORE_URL}/${store.storeId}`,
             method:"DELETE"           
         }).then((response)=>{
             if(response.data.isSuccess)
@@ -123,14 +125,18 @@ const StoreService=()=>
 
 return(
     <>
+    {loading?<p>Loading...</p>:(
         <StoreDashboard 
         stores={stores} 
         createStore={createStore} 
         updateStore={updateStore}
         deleteStore={deleteStore}>
-        </StoreDashboard>
+        </StoreDashboard> 
+        )}
+
         <ToastContainer position="top-right"></ToastContainer>
     </>
+   
 )
 }
 export default StoreService;

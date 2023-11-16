@@ -36,7 +36,10 @@ const SaleDashboard=(props)=>
                 message="Are you sure you want to delete this item?"
                 product={props.sale}/>
 
-        <SaleAdd products={props.products}></SaleAdd>
+        <SaleAdd 
+        products={props.products} 
+        customers={props.customers}
+        stores={props.stores} ></SaleAdd>
         <SaleEdit></SaleEdit>
         <SaleTable
         handleOpenDelete={handleOpenDelete}

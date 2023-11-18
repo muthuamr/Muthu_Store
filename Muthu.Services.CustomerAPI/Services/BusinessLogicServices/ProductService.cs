@@ -124,15 +124,24 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
             var result = (recordsAffected, productDesc);
             try
             {
-                result = await _productRepoitory.DeleteProduct(productId);
-                if (result.recordsAffected > 0)
+                bool isReferenced = _productRepoitory.IsParentReferenced(productId);
+                if (!isReferenced)
                 {
-                    _responseDto.IsSuccess = true;
-                    _responseDto.Message = $"Product '{result.productDesc}' deleted successfully";
+                    result = await _productRepoitory.DeleteProduct(productId);
+                    if (result.recordsAffected > 0)
+                    {
+                        _responseDto.IsSuccess = true;
+                        _responseDto.Message = $"Product '{result.productDesc}' deleted successfully";
+                    }
+                    else
+                    {
+                        _responseDto.Message = $"No product exists";
+                    }
                 }
                 else
                 {
-                    _responseDto.Message = $"No product exists";
+                    _responseDto.IsSuccess = false;
+                    _responseDto.Message = "The selected product already have referenced with some other data. So the record is unable to delete.";
                 }
             }
 

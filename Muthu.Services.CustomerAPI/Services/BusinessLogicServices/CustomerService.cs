@@ -68,18 +68,27 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
 
         public async Task<ResponseDto> DeleteCustomer(int Id)
         {
-            recordsAffected = 0;
-            recordsAffected = await _customerRepository.DeleteCustomer(Id);
-
-            if (recordsAffected > 0)
+            bool isReferenced = _customerRepository.IsParentReferenced(Id);
+            if (!isReferenced)
             {
-                _responseDto.IsSuccess = true;
-                _responseDto.Message = "Customer Deleted Successfully!";
+                recordsAffected = 0;
+                recordsAffected = await _customerRepository.DeleteCustomer(Id);
+
+                if (recordsAffected > 0)
+                {
+                    _responseDto.IsSuccess = true;
+                    _responseDto.Message = "Customer Deleted Successfully!";
+                }
+                else
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.Message = "Customer Failed to Delete!";
+                }
             }
             else
             {
                 _responseDto.IsSuccess = false;
-                _responseDto.Message = "Customer Failed to Delete!";
+                _responseDto.Message = "The selected customer already have referenced with some other data. So the record is unable to delete.";
             }
             return _responseDto;
         }

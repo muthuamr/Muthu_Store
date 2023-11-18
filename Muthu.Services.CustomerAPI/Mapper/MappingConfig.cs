@@ -52,20 +52,21 @@ namespace Muthu.MicroService.Mapper
                 ForMember(dest => dest.ProductId, src => src.MapFrom(src => src.ProductId)).
                 ForMember(dest => dest.StoreId, src => src.MapFrom(src => src.StoreId)).
                 ForMember(dest => dest.CustomerId, src => src.MapFrom(src => src.CustomerId)).
-                ForMember(dest => dest.OrderDateTime, src => src.MapFrom(src => src.DateSold)).
+                //ForMember(dest => dest.OrderDateTime, src => src.MapFrom(src => src.DateSold)).
                 ReverseMap();
 
-                config.CreateMap<Sale, SalesViewSummaryDto>().
-                ForMember(dest => dest.SalesId, src => src.MapFrom(src => src.Id)).
-                ForMember(dest => dest.ProductName, src => src.MapFrom(src => src.Product.Name)).
-                ForMember(dest => dest.ProductPrice, src => src.MapFrom(src => src.Product.Price)).
-                ReverseMap();
+                //config.CreateMap<Sale, SalesViewSummaryDto>().
+                //ForMember(dest => dest.SalesId, src => src.MapFrom(src => src.Id)).
+                //ForMember(dest => dest.ProductName, src => src.MapFrom(src => src.Product.Name)).
+                //ForMember(dest => dest.ProductPrice, src => src.MapFrom(src => src.Product.Price)).
+                //ReverseMap();
 
                 config.CreateMap<Sale, SalesViewDetailDto>().
                 ForMember(dest => dest.CustomerName, src => src.MapFrom(src => src.Customer.Name)).
                 ForMember(dest => dest.StoreName, src => src.MapFrom(src => src.Store.Name)).
                 ForMember(dest => dest.ProductName, src => src.MapFrom(src => src.Product.Name)).
                 ForMember(dest => dest.SalesId, src => src.MapFrom(src => src.Id)).
+                ForMember(dest => dest.OrderDateTime, src => src.MapFrom(src => src.DateSold.ToString("dd/MM/yyyy HH:mm:ss"))).
                 ReverseMap();
 
             });

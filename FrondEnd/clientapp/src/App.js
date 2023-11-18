@@ -10,6 +10,7 @@ export const API_URL = 'https://localhost:7119/api';
 export const API_PRODUCT_URL = 'https://localhost:7119/api/products';
 export const API_CUSTOMER_URL="https://localhost:7119/api/customers";
 export const API_STORE_URL="https://localhost:7119/api/store";
+export const API_SALES_URL="https://localhost:7119/api/sale";
 
 function App() {
 

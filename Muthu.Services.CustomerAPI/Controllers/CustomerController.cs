@@ -62,14 +62,7 @@ namespace Muthu.Services.CustomerAPI.Controllers
         public async Task<ActionResult<ResponseDto>> DeleteCustomer(int customerId)
         {
             _responseDto = await _customerService.DeleteCustomer(customerId);
-            if (_responseDto.IsSuccess)
-            {
-                return Ok(_responseDto);
-            }
-            else
-            {
-                return NotFound(_responseDto);
-            }
+            return Ok(_responseDto);
         }
 
 

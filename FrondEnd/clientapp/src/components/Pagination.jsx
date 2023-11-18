@@ -22,7 +22,9 @@ function Pagination({itemsPerPage, currentPage, totalItems, onPageChange,onItems
     <div className="pagination">
       <label htmlFor='itemsPerPage' style={{marginRight:'10px'}}>Records per page: </label>
       <select id='itemsPerPage' value={itemsPerPage} onChange={handleItemsPerPageChange}>
+        <option value="2">2</option>
         <option value="5">5</option>
+        <option value="9">9</option>
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>

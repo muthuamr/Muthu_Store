@@ -12,19 +12,19 @@ const ProductService=()=>
     const [product, setProduct]=useState([]);
     const [loading, setLoading] = useState(true);
    
-        useEffect(()=>{
-            const getProductList=async ()=>
-            {
-              await fetchData(API_PRODUCT_URL).then(result=>{
-                setProducts(result);
-              }).catch(error=>{                
-                toast.error(error,{POSITION:toast.POSITION.TOP_RIGHT});
-              }).finally(()=>{
-                setLoading(false);
-              })             
-            };
-            getProductList();
-            },[]);
+    useEffect(()=>{
+        const getProductList=async ()=>
+        {
+            await fetchData(API_PRODUCT_URL).then(result=>{
+            setProducts(result);
+            }).catch(error=>{                
+            toast.error(error,{POSITION:toast.POSITION.TOP_RIGHT});
+            }).finally(()=>{
+            setLoading(false);
+            })             
+        };
+        getProductList();
+        },[]);
        
     const createProduct=(product)=>
     {
@@ -111,6 +111,10 @@ const ProductService=()=>
            {
             toast.success(response.data.message,{POSITION:toast.POSITION.TOP_RIGHT});
            }
+           else if(!response.data.isSuccess)
+            {
+                toast.error(response.data.message);
+            }
            else
            {
             toast.error(response.data.message,{POSITION:toast.POSITION.TOP_RIGHT});

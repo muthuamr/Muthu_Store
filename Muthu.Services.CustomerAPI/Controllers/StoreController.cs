@@ -63,14 +63,7 @@ namespace Muthu.MicroService.Controllers
         public async Task<ActionResult<ResponseDto>> DeleteProduct(int storeId)
         {
             _responseDto = await _storeService.DeleteStore(storeId);
-            if (_responseDto.IsSuccess)
-            {
-                return Ok(_responseDto);
-            }
-            else
-            {
-                return NotFound(_responseDto);
-            }
+            return Ok(_responseDto);
         }
     }
 }

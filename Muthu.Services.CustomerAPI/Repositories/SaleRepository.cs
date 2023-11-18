@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Muthu.Infrastructure.Models;
 using Muthu.MicroService.Repositories.IRepositories;
+using System.Data.Common;
 
 namespace Muthu.MicroService.Repositories
 {
@@ -14,9 +15,17 @@ namespace Muthu.MicroService.Repositories
 
         public async Task<Sale> CreateSale(Sale sale)
         {
-            _storeContext.Sales.Add(sale);
-            await _storeContext.SaveChangesAsync();
-            return sale;
+            try
+            {
+                sale.DateSold = DateTime.Now;
+                _storeContext.Sales.Add(sale);
+                await _storeContext.SaveChangesAsync();
+                return sale;
+            }
+            catch (DbException ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<(int records, Sale? sale)> DeleteSale(long id)
@@ -36,10 +45,6 @@ namespace Muthu.MicroService.Repositories
 
         public async Task<IEnumerable<Sale>> GetSalesAsync()
         {
-            //return await _storeContext.Sales.
-            //     Include(sale => sale.Product).
-            //     ToListAsync();
-
             return await _storeContext.Sales.
                Include(sale => sale.Product).
                Include(sale => sale.Store).

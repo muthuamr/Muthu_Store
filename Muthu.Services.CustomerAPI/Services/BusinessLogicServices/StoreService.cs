@@ -53,15 +53,24 @@ namespace Muthu.MicroService.Services.BusinessLogicServices
         {
             try
             {
-                var result = await _storeRepository.DeleteStore(id);
-                if (result.Item1 > 0)
+                bool isReferenced = _storeRepository.IsParentReferenced(id);
+                if (!isReferenced)
                 {
-                    _responseDto.IsSuccess = true;
-                    _responseDto.Message = $"Store '{result.Item2.Name}' deleted successfully";
+                    var result = await _storeRepository.DeleteStore(id);
+                    if (result.Item1 > 0)
+                    {
+                        _responseDto.IsSuccess = true;
+                        _responseDto.Message = $"Store '{result.Item2.Name}' deleted successfully";
+                    }
+                    else
+                    {
+                        _responseDto.Message = $"Store '{result.Item2.Name}' delete failed";
+                    }
                 }
                 else
                 {
-                    _responseDto.Message = $"Store '{result.Item2.Name}' delete failed";
+                    _responseDto.IsSuccess = false;
+                    _responseDto.Message = "The selected store already have referenced with some other data. So the record is unable to delete.";
                 }
             }
             catch

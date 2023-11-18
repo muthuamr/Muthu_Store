@@ -10,6 +10,7 @@ namespace Muthu.MicroService.Repositories.IRepositories
         public Task<int> CreateCustomer(Customer customer);
         public Task<int> UpdateCustomer(Customer customer);
         public Task<int> DeleteCustomer(int id);
+        public bool IsParentReferenced(int parentId);
 
     }
 }

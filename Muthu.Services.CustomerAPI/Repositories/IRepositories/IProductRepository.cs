@@ -8,6 +8,7 @@ namespace Muthu.MicroService.Repositories.IRepositories
         public Task<Product> CreateProduct(Product product);
         public Task<int> UpdateProduct(Product product);
         public Task<(int recordsAffected, string ProductDesc)> DeleteProduct(int productId);
+        public bool IsParentReferenced(int parentId);
 
 
     }

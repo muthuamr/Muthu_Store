@@ -98,5 +98,12 @@ namespace Muthu.MicroService.Repositories
                 throw new Exception($"Produts failed to update and error is {ex}");
             }
         }
+        public bool IsParentReferenced(int parentId)
+        {
+            // Check if there are any Child entities referencing the specified ParentId
+            bool isReferenced = _muthuStoreContext.Sales.Any(c => c.ProductId == parentId);
+
+            return isReferenced;
+        }
     }
 }

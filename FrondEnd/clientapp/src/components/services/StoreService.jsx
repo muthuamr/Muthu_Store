@@ -114,6 +114,10 @@ const StoreService=()=>
                 setStores([...stores.filter((x)=>x.storeId!==store.storeId)]);
                 toast.success(response.data.message);
             }
+            else if(!response.data.isSuccess)
+            {
+                toast.error(response.data.message);
+            }
             else{
                 toast.error(response.data.message);
             }

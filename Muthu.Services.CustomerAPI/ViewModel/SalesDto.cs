@@ -6,7 +6,6 @@
         public int ProductId { get; set; }
         public int CustomerId { get; set; }
         public int StoreId { get; set; }
-        public DateTime OrderDateTime { get; set; }
 
     }
 
@@ -23,14 +22,15 @@
         public string StoreName { get; set; } = null!;
         public string ProductName { get; set; } = null!;
         public decimal ProductPrice { get; set; }
+        public string OrderDateTime { get; set; }
     }
 
-    public class SalesViewSummaryDto
-    {
-        public long SalesId { get; set; }
-        public string ProductName { get; set; } = null!;
-        public decimal ProductPrice { get; set; }
-    }
+    //public class SalesViewSummaryDto
+    //{
+    //    public long SalesId { get; set; }
+    //    public string ProductName { get; set; } = null!;
+    //    public decimal ProductPrice { get; set; }
+    //}
 
 
 }

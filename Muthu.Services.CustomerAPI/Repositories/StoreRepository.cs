@@ -75,5 +75,13 @@ namespace Muthu.MicroService.Repositories
             }
 
         }
+
+        public bool IsParentReferenced(int parentId)
+        {
+            // Check if there are any Child entities referencing the specified ParentId
+            bool isReferenced = _muthuStoreContext.Sales.Any(c => c.StoreId == parentId);
+
+            return isReferenced;
+        }
     }
 }

@@ -33,10 +33,10 @@ namespace Muthu.MicroService.Controllers
 
         }
 
-        [HttpGet("{saleId}")]
-        public async Task<ActionResult<ResponseDto>> GetSalesByIdAsync(long saleId)
+        [HttpGet("{salesId}")]
+        public async Task<ActionResult<ResponseDto>> GetSalesByIdAsync(long salesId)
         {
-            _responseDto = await _saleService.GetSalesByIdAsync(saleId);
+            _responseDto = await _saleService.GetSalesByIdAsync(salesId);
             if (_responseDto.IsSuccess)
             {
                 return Ok(_responseDto);
@@ -47,7 +47,7 @@ namespace Muthu.MicroService.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<ResponseDto>> CreateSale([FromBody] SalesCreateDto salesCreateDto)
         {
 
@@ -76,10 +76,10 @@ namespace Muthu.MicroService.Controllers
             }
         }
 
-        [HttpDelete("{saleId}")]
-        public async Task<ActionResult<ResponseDto>> DeleteSale(long saleId)
+        [HttpDelete("{salesId}")]
+        public async Task<ActionResult<ResponseDto>> DeleteSale(long salesId)
         {
-            _responseDto = await _saleService.DeleteSale(saleId);
+            _responseDto = await _saleService.DeleteSale(salesId);
             if (_responseDto.IsSuccess)
             {
                 return Ok(_responseDto);

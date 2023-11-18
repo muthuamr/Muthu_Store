@@ -2,16 +2,13 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import CustomerDashboard from "../customer/CustomerDashboard";
 import { useEffect, useState } from "react";
-import ConfirmationModal from '../ConfirmationModal';
+
 import {API_CUSTOMER_URL} from '../../App';
 import { fetchData } from "../utility/fetchDataAPI";
+
 const CustomerService=()=>
 {
     const [customers, setCustomers]=useState([]);
-    const [customer, setCustomer]=useState([]);
-    const [showAddForm, setshowAddForm]=useState(false);
-    const [showEditForm, setshowEditForm]=useState(false);
-    const [showConfirmation, setShowConfirmation] = useState(false);
     const [loading, setLoading]=useState(true);
     
     useEffect(()=>{
@@ -72,7 +69,6 @@ const CustomerService=()=>
         
       } 
 
-
       const updateCustomer=(customer)=>
     {
         axios({
@@ -110,25 +106,28 @@ const CustomerService=()=>
             .catch((error) => {
               console.log("the error has occured: " + error);
             });
-        
     }
 
-    const deleteCustomer=()=>
+    const deleteCustomer=(customer)=>
     {
-        setCustomer("");
         axios.delete(`${API_CUSTOMER_URL}/${customer.customerId}`).then((response)=>{
           if(response.data.isSuccess)
           {
+            setCustomers([...customers.filter((x)=>x.customerId!==customer.customerId)]);
             toast.success(response.data.message, {
                 position:toast.POSITION.TOP_RIGHT
             });
           }
+          else if(!response.data.isSuccess)
+          {
+            toast.error(response.data.message);
+          }
           else{
-            console.log("The API failed"+response.data.message);
+            console.log("The API failed"+response.data);
           }
         });
 
-        setCustomers([...customers.filter((x)=>x.customerId!==customer.customerId)]);
+        
     }
 
     const getupdatedCustomers =(customer)=> customers.map((customerItem) => {
@@ -140,45 +139,6 @@ const CustomerService=()=>
         return customerItem;
       });
     
-   const editForm=(customer)=>
-   {
-       setCustomer("");
-       setshowAddForm(false);
-       setshowEditForm(true);
-       setCustomer(customer);
-   }
-
-   const addForm=()=>
-   {
-       setshowAddForm(true);
-       setshowEditForm(false);
-   }
-
-   const closeForm=()=>
-   {
-       setshowAddForm(false);
-       setshowEditForm(false);
-       setCustomer("");
-   }
-
-   const openDelete=(customer)=>
-   {
-       setCustomer(customer);
-       setShowConfirmation(true);
-   }
-
-     const handleConfirmDelete = () => {
-       // Perform the delete operation
-       // Close the confirmation modal
-       setShowConfirmation(false);
-       deleteCustomer();
-     };
-   
-     const handleCancelDelete = () => {
-       // Close the confirmation modal
-       setShowConfirmation(false);
-     };
-
     return(
         <>
            {loading ? (
@@ -186,28 +146,13 @@ const CustomerService=()=>
             ) :(
               <CustomerDashboard 
                   customers={customers}
-                  showAddForm={showAddForm}
-                  showEditForm={showEditForm}
-                  addForm={addForm}
-                  editForm={editForm}
-                  customer={customer}
-                  openDelete={openDelete}
                   deleteCustomer={deleteCustomer}
-                  closeForm={closeForm}
                   createCustomer={createCustomer}
                   updateCustomer={updateCustomer}>
               </CustomerDashboard>
             )}
 
-        <ConfirmationModal
-            show={showConfirmation}
-            onHide={handleCancelDelete}
-            onConfirm={handleConfirmDelete}       
-            title="Confirm Delete"
-            message="Are you sure you want to delete this item?"
-            customer={customer}/>
-
-            <ToastContainer position="top-center"></ToastContainer>  
+            <ToastContainer position="top-right"></ToastContainer>  
         </>
 
     );

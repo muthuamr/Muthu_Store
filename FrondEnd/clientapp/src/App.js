@@ -6,11 +6,11 @@ import ProductService from './components/services/ProductService';
 import StoreService from './components/services/StoreService';
 import SaleService from './components/services/SaleService';
 
-export const API_URL = 'https://localhost:7119/api';
-export const API_PRODUCT_URL = 'https://localhost:7119/api/products';
-export const API_CUSTOMER_URL="https://localhost:7119/api/customers";
-export const API_STORE_URL="https://localhost:7119/api/store";
-export const API_SALES_URL="https://localhost:7119/api/sale";
+export const API_URL = 'https://muthustore.azurewebsites.net/';
+export const API_PRODUCT_URL = `${API_URL}/api/products`;
+export const API_CUSTOMER_URL= `${API_URL}/api/customers`;
+export const API_STORE_URL= `${API_URL}/api/store`;
+export const API_SALES_URL= `${API_URL}/api/sale`;
 
 function App() {
 

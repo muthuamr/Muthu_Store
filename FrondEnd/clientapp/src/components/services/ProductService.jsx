@@ -109,6 +109,7 @@ const ProductService=()=>
         {
            if(response.data.isSuccess)
            {
+            setProducts([...products.filter((x=>x.productId!==product.productId))]);
             toast.success(response.data.message,{POSITION:toast.POSITION.TOP_RIGHT});
            }
            else if(!response.data.isSuccess)
@@ -124,7 +125,7 @@ const ProductService=()=>
             toast.error(error.response.message,{POSITION:toast.POSITION.TOP_RIGHT});
         }); 
         
-        setProducts([...products.filter((x=>x.productId!==product.productId))]);
+        
     }
 
     return(

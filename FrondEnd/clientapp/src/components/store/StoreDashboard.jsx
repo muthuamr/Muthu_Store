@@ -2,8 +2,8 @@ import StoreAdd from "./StoreAdd";
 import StoreTable from "./StoreTable";
 import StoreEdit from "./StoreEdit";
 import { useState } from "react";
-import ConfirmationModal from "../ConfirmationModal";
-import Pagination from "../Pagination";
+import ConfirmationModal from "../utility/ConfirmationModal";
+import Pagination from "../utility/Pagination";
 
 const StoreDashboard=(props)=>
 {

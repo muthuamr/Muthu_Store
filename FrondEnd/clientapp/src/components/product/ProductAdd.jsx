@@ -6,10 +6,8 @@ import { toast } from 'react-toastify';
 
 
 const ProductAdd=(props)=> {
-    const [show,setShow]=useState();
-    const [update, setUpdate]=useState();
+    
     const [isOpen,setisOpen]=useState(true);
-    const [closeModal, setcloseModal]=useState(true);
 
     const initialState=
     {

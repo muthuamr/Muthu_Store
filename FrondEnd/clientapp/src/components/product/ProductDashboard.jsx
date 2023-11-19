@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ConfirmationModal from "../ConfirmationModal";
+import ConfirmationModal from "../utility/ConfirmationModal";
 import ProductTable from "./ProductTable";
 import ProductAdd from "./ProductAdd";
 import ProductEdit from "./ProductEdit";
-import Pagination from "../Pagination";
+import Pagination from "../utility/Pagination";
 
 const ProductDashboard=(props)=>
 {

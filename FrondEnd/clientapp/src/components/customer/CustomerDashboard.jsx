@@ -3,10 +3,10 @@ import CustomerTable from "./CustomerTable";
 import { useState } from "react";
 import CustomerEdit from "./CustomerEdit";
 import "react-toastify/dist/ReactToastify.css";
-import Pagination from "../Pagination";
+import Pagination from "../utility/Pagination";
 import "../../customer.css";
 import CustomerAdd from "./CustomerAdd";
-import ConfirmationModal from '../ConfirmationModal';
+import ConfirmationModal from '../utility/ConfirmationModal';
 
 const CustomerDashboard=(props)=>{
 

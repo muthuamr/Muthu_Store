@@ -1,7 +1,7 @@
 // Pagination.js
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Pagination.css'
+import '../../Pagination.css'
 
 function Pagination({itemsPerPage, currentPage, totalItems, onPageChange,onItemsPerPageChange }) {
   const pageNumbers = [];

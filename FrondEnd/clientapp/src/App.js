@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import NavigationMenu from './components/NavigationMenu';
+import NavigationMenu from './components/utility/NavigationMenu';
 import CustomerService from './components/services/CustomerService';
 import ProductService from './components/services/ProductService';
 import StoreService from './components/services/StoreService';

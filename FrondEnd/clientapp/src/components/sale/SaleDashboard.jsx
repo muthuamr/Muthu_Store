@@ -1,9 +1,9 @@
 import SaleAdd from "./SaleAdd";
 import SaleEdit from "./SaleEdit";
 import SaleTable from "./SaleTable";
-import ConfirmationModal from "../ConfirmationModal";
+import ConfirmationModal from "../utility/ConfirmationModal";
 import { useState } from "react";
-import Pagination from "../Pagination";
+import Pagination from "../utility/Pagination";
 
 const SaleDashboard=(props)=>
 {

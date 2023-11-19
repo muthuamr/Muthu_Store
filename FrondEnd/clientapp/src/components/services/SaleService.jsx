@@ -4,7 +4,6 @@ import axios from "axios";
 import {API_PRODUCT_URL, API_CUSTOMER_URL,API_STORE_URL,API_SALES_URL} from '../../App';
 import { toast, ToastContainer } from "react-toastify";
 import { fetchData } from "../utility/fetchDataAPI";
-import CardExampleGroups from '../sale/ThemingLayout';
 
 const SaleService=()=>
 {
@@ -148,7 +147,6 @@ const SaleService=()=>
                 deleteSale={deleteSale}
                 >
                 </SaleDashboard>)}
-               <CardExampleGroups></CardExampleGroups>
                 <ToastContainer position="top-right"></ToastContainer>
         </>
     )

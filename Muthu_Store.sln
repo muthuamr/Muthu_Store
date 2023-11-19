@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muthu.Infrastructure", "Muthu.Infrastructure\Muthu.Infrastructure.csproj", "{E4C4EEA0-010B-4C58-B1C9-3E2DA6DF8A74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muthu.MicroService", "Muthu.Services.CustomerAPI\Muthu.MicroService.csproj", "{C411404A-6735-4B22-907D-E63C9F76538B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muthu.MicroService", "Muthu.Services\Muthu.MicroService.csproj", "{C411404A-6735-4B22-907D-E63C9F76538B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F2EAA40C-8570-47CD-BD14-DDDE90A57E8C}"
 EndProject

@@ -17,7 +17,7 @@ const StoreService=()=>
                 setStores(result);
             }).catch((error)=>
             {
-                toast.error(error.response.message);            
+                toast.error(error.response);            
             }).finally(()=>
             {
                 setLoading(false);

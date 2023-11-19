@@ -6,6 +6,7 @@ import ProductService from './components/services/ProductService';
 import StoreService from './components/services/StoreService';
 import SaleService from './components/services/SaleService';
 
+
 export const API_URL = 'https://muthustore.azurewebsites.net/';
 export const API_PRODUCT_URL = `${API_URL}/api/products`;
 export const API_CUSTOMER_URL= `${API_URL}/api/customers`;

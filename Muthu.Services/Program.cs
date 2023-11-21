@@ -71,4 +71,3 @@ app.MapControllers();
 app.UseMiddleware<DbContextCheckMiddleware>();
 
 app.Run();
-
